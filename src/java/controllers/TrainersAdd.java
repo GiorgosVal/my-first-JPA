@@ -83,12 +83,7 @@ public class TrainersAdd extends HttpServlet {
         String subject = request.getParameter("subject");
         Trainer t = new Trainer(fname, lname, subject);
         if (tserv.addTrainer(t)) {
-            try (PrintWriter out = response.getWriter()) {
-                out.println(html.startHTML("Add success"));
-                out.println("<a href='/TrainersJPA'>Home</a>");
-                out.println("<h1>Trainer added successfully</h1>");
-                out.println(html.endHTML());
-            }
+            response.sendRedirect("trainers");
         } else {
             try (PrintWriter out = response.getWriter()) {
                 out.println(html.startHTML("Failed to add"));

@@ -90,15 +90,7 @@ public class TrainersUpdate extends HttpServlet {
         long id = Long.parseLong(request.getParameter("id"));
         Trainer t = new Trainer(id, fname, lname, subject);
         if(tserv.updateTrainer(t)){
-            try (PrintWriter out = response.getWriter()) {
-                out.println(html.startHTML("Update success"));
-                out.println("<a href='/TrainersJPA'>Home</a>");
-                out.println("<h1>Trainer updated successfully</h1>");
-                out.println(html.endHTML());
-            }
-//            RequestDispatcher rd = request.getRequestDispatcher("trainers");    // ---------------------------------------------------------------
-//            rd.forward(request, response);          // ΓΙΑ ΚΑΠΟΙΟ ΛΟΓΟ ΕΝΩ ΚΑΝΕΙ ΤΟ UPDATE, ΔΕΝ ΠΗΓΑΙΝΕΙ ΣΤΟ trainers
-//            // -----------------------------------------------------------------------------------
+            response.sendRedirect("trainers");
         } else {
             try (PrintWriter out = response.getWriter()) {
                 out.println(html.startHTML("Failed to update"));
